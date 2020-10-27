@@ -8,7 +8,7 @@ There are three variables to set at the top of RMS.py for checking an RMS scenar
 3. periods = is a list of the period of each process
 One 'process' is modelled by an execution time and a period at the same index position in their respective lists
 
-After setting these paramters at the top of RMS.py, run RMS.py the console will be populating with a scheduling trace and whether or not all deadlines are met.
+After setting these paramters at the top of RMS.py, run RMS.py to see the schedule trace and deadline results.
 
 ### paramter requirements
 - num_processors must be greater than or equal to one.
