@@ -36,6 +36,10 @@ class RMS:
         # (if we can meet all deadlines over this time, we always meet deadlines)
         max_period = max(periods)
         
+        # this list will keep track of which process have met thier first deadline
+        ## if all processes met their first deadline in the first max period, then we can stop early
+        deadlines_met = [False] * len(execution_times)
+        
         #this list will represent processes currently in the system
         processes = list()
         
@@ -62,12 +66,19 @@ class RMS:
                 if process.status == RUNNING_STATUS and process.time_left == 0:
                     processes.remove(process)
                     print("process", process.id, "completed at time", time)
+                    if deadlines_met[process.id-1] == False:
+                        deadlines_met[process.id-1] = True
             
             #check if we have missed any deadlines
             for process in processes:
                 if process.deadline <= time:
                      print("deadline missed for process", process.id, "at time", time)
                      return
+            
+            #check if all deadlines have been met once in thie first period
+            if sum(1 for met in deadlines_met if not met) == 0:
+                print("all deadlines met within", time, "milliseconds with", num_processors, "processors")
+                return
             
             #add any incoming processes to process pool
             while arrival_events.events[0].time == time:
