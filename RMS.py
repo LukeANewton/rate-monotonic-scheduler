@@ -6,7 +6,6 @@ Created on Sun Oct 25 15:05:00 2020
 """
 
 from FEL import FEL
-import sys 
 
 num_processors = 2
 execution_times = [160, 48, 40, 48, 56, 80 ,10]
@@ -68,7 +67,7 @@ class RMS:
             for process in processes:
                 if process.deadline <= time:
                      print("deadline missed for process", process.id, "at time", time)
-                     sys.exit()
+                     return
             
             #add any incoming processes to process pool
             while arrival_events.events[0].time == time:
